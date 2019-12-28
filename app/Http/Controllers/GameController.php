@@ -13,8 +13,6 @@ class GameController extends Controller
         $gameData = $game
             ->all();
 
-        dd($gameData);
-
         return view('game.index', ['gameData' => $gameData]);
     }
 }
