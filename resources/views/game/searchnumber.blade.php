@@ -13,13 +13,5 @@
     @endforeach
 </table>
 
-<form action="/searchnumber" method="post">
-    {{ csrf_field() }}
-    <div>
-        <p>プレイ人数：<input type="text" name="playersnumber"></p>
-    </div>
-    <input type="submit" value="検索">
-</form>
-
 </body>
 </html>
