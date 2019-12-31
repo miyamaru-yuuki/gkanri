@@ -1,5 +1,4 @@
 <?php
 
 Route::get('/', 'GameController@index');
-
-Route::post('/searchnumber', 'GameController@searchnumber');
+Route::get('/searchnumber', 'GameController@searchnumber');
