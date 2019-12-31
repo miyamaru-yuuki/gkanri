@@ -32,4 +32,17 @@ class GameController extends Controller
 
         return view('game.searchnumber', ['gameData' => $gameData]);
     }
+
+    public function searchage(Request $request)
+    {
+        $playersage = $request->query('playersage');
+
+        $game = new Game();
+        $gameData = $game
+            ->join('maker', 'maker.mid', '=', 'game.mid')
+            ->where('recommendedage', '<=', $playersage)
+            ->get();
+
+        return view('game.searchage', ['gameData' => $gameData]);
+    }
 }

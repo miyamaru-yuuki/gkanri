@@ -13,19 +13,5 @@
     @endforeach
 </table>
 
-<form action="/searchnumber" method="get">
-    <div>
-        <p>プレイ人数：<input type="text" name="playersnumber"></p>
-    </div>
-    <input type="submit" value="検索">
-</form>
-
-<form action="/searchage" method="get">
-    <div>
-        <p>年齢：<input type="text" name="playersage"></p>
-    </div>
-    <input type="submit" value="検索">
-</form>
-
 </body>
 </html>
