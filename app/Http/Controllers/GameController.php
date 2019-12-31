@@ -21,7 +21,7 @@ class GameController extends Controller
 
     public function searchnumber(Request $request)
     {
-        $playersnumber = $request->input('playersnumber');
+        $playersnumber = $request->query('playersnumber');
 
         $game = new Game();
         $gameData = $game
