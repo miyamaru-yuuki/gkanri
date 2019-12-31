@@ -19,30 +19,20 @@ class GameController extends Controller
         return view('game.index', ['gameData' => $gameData]);
     }
 
-    public function searchnumber(Request $request)
+    public function search(Request $request)
     {
+
         $playersnumber = $request->query('playersnumber');
+        $playersage = $request->query('playersage');
 
         $game = new Game();
         $gameData = $game
             ->join('maker', 'maker.mid', '=', 'game.mid')
             ->where('playersnumbermin', '<=', $playersnumber)
             ->where('playersnumbermax', '>=', $playersnumber)
-            ->get();
-
-        return view('game.searchnumber', ['gameData' => $gameData]);
-    }
-
-    public function searchage(Request $request)
-    {
-        $playersage = $request->query('playersage');
-
-        $game = new Game();
-        $gameData = $game
-            ->join('maker', 'maker.mid', '=', 'game.mid')
             ->where('recommendedage', '<=', $playersage)
             ->get();
 
-        return view('game.searchage', ['gameData' => $gameData]);
+        return view('game.searchnumber', ['gameData' => $gameData]);
     }
 }
