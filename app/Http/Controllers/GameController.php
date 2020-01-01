@@ -28,9 +28,13 @@ class GameController extends Controller
         $game = new Game();
         $gameData = $game
             ->join('maker', 'maker.mid', '=', 'game.mid')
-            ->where('playersnumbermin', '<=', $playersnumber)
-            ->where('playersnumbermax', '>=', $playersnumber)
-            ->where('recommendedage', '<=', $playersage)
+            ->when($playersnumber, function ($query, $playersnumber) {
+                return $query->where('playersnumbermin', '<=', $playersnumber)
+                    ->where('playersnumbermax', '>=', $playersnumber);
+            })
+            ->when($playersage, function ($query, $playersage) {
+                return $query->where('recommendedage', '<=', $playersage);
+            })
             ->get();
 
         return view('game.searchnumber', ['gameData' => $gameData]);
