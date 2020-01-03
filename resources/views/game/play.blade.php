@@ -19,7 +19,7 @@
     {{ csrf_field() }}
     <div>ゲーム名：
         <select name="gid">
-            @foreach($gameData as $data)
+            @foreach($gameDataAll as $data)
                 <option value="{{$data['gid']}}">{{$data['gname']}}</option>
             @endforeach
         </select>
