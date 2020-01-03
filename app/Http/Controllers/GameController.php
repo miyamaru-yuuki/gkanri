@@ -4,7 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Game;
-//use App\Models\Maker;
+use App\Models\Play;
 use DB;
 
 class GameController extends Controller
@@ -50,5 +50,30 @@ class GameController extends Controller
             ->get();
 
         return view('game.play', ['gameData' => $gameData]);
+    }
+
+    public function playaddkakunin(\App\Http\Requests\PlayAddRequest $request)
+    {
+        $gid = $request->input('gid');
+        $hi = $request->input('hi');
+        $evaluation = $request->input('evaluation');
+
+        $game = new Game();
+        $gameData = $game
+            ->find($gid);
+
+        return view('game.playaddkakunin',['gid' => $gid,'hi' => $hi,'evaluation' => $evaluation,'gameData' => $gameData]);
+    }
+
+    public function playaddkanryou(Request $request)
+    {
+        $gid = $request->input('gid');
+        $hi = $request->input('hi');
+        $evaluation = $request->input('evaluation');
+
+        $play = new Play();
+        $play->create(['gid' => $gid,'hi' => $hi,'evaluation' => $evaluation]);
+
+        return view('game.kanryou',['shori' => 'プレイ記録追加']);
     }
 }

@@ -13,5 +13,23 @@
     @endforeach
 </table>
 
+<br>
+
+<form action="/playaddkakunin" method="post">
+    {{ csrf_field() }}
+    <div>ゲーム名：
+        <select name="gid">
+            @foreach($gameData as $data)
+                <option value="{{$data['gid']}}">{{$data['gname']}}</option>
+            @endforeach
+        </select>
+    </div>
+    <p>プレイした日時：<input type="date" name="hi"></p>
+    <p>プレイの評価：<input type="text" name="evaluation"></p>
+    <input type="submit" value="追加">
+</form>
+
+<a href="{{ url('/') }}">戻る</a>
+
 </body>
 </html>
