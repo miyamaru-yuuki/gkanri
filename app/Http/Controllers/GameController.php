@@ -85,8 +85,8 @@ class GameController extends Controller
         $gameData = $game
             ->join('maker', 'maker.mid', '=', 'game.mid')
             ->join('play', 'play.gid', '=', 'game.gid')
-            ->select(DB::raw('count("*") AS playcount,game.gid,mname,gname'))
-            ->groupBy('play.gid')
+            ->select(DB::raw('count("*") AS playcount,play.gid,mname,gname'))
+            ->groupBy('play.gid','mname','gname')
             ->get();
 
         return view('game.playcount', ['gameData' => $gameData]);
