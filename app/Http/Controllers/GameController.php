@@ -78,4 +78,17 @@ class GameController extends Controller
 
         return view('game.kanryou',['shori' => 'プレイ記録追加']);
     }
+
+    public function playcount()
+    {
+        $game = new Game();
+        $gameData = $game
+            ->join('maker', 'maker.mid', '=', 'game.mid')
+            ->join('play', 'play.gid', '=', 'game.gid')
+            ->select(DB::raw('count("*") AS playcount,game.gid,mname,gname'))
+            ->groupBy('play.gid')
+            ->get();
+
+        return view('game.playcount', ['gameData' => $gameData]);
+    }
 }

@@ -16,6 +16,7 @@
 <br>
 
 <div><a href="{{ url('play/') }}">プレイ記録一覧</a></div>
+<div><a href="{{ url('playcount/') }}">ゲーム別プレイ回数</a></div>
 
 <form action="/search" method="get">
     <div>
