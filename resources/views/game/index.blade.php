@@ -28,9 +28,9 @@
 
 <form action="/playcount" method="get">
     <div>年度：
-        <select name="pid">
+        <select name="hi">
             @foreach($playData as $data)
-                <option value="{{$data['pid']}}">{{$data['hi']}}</option>
+                <option value="{{$data['hi']}}">{{$data['hi']}}</option>
             @endforeach
         </select>
     </div>

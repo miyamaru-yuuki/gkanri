@@ -18,7 +18,7 @@ class GameController extends Controller
 
         $play = new Play();
         $playData = $play
-            ->select(DB::raw('gid,YEAR(hi) AS hi'))
+            ->select(DB::raw('YEAR(hi) AS hi'))
             ->distinct()
             ->get();
 
@@ -34,6 +34,7 @@ class GameController extends Controller
         $game = new Game();
         $gameData = $game
             ->join('maker', 'maker.mid', '=', 'game.mid')
+            ->join('play', 'play.gid', '=', 'game.gid')
             ->when($playersnumber, function ($query, $playersnumber) {
                 return $query->where('playersnumbermin', '<=', $playersnumber)
                     ->where('playersnumbermax', '>=', $playersnumber);
@@ -85,14 +86,17 @@ class GameController extends Controller
         return view('game.kanryou',['shori' => 'プレイ記録追加']);
     }
 
-    public function playcount()
+    public function playcount(Request $request)
     {
+//        $hi = $request->query('hi');
+
         $game = new Game();
         $gameData = $game
             ->join('maker', 'maker.mid', '=', 'game.mid')
             ->join('play', 'play.gid', '=', 'game.gid')
-            ->select(DB::raw('count("*") AS playcount,avg(evaluation) AS evaluationAvg,play.gid,mname,gname'))
-            ->groupBy('play.gid','mname','gname')
+            ->select(DB::raw('count("*") AS playcount,avg(evaluation) AS evaluationAvg,play.gid,mname,gname,hi'))
+            ->where(DB::raw('YEAR(hi)=2019'))
+            ->groupBy('play.gid','mname','gname','hi')
             ->get();
 
         return view('game.playcount', ['gameData' => $gameData]);
