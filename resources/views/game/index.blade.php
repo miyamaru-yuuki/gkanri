@@ -16,7 +16,6 @@
 <br>
 
 <div><a href="{{ url('play/') }}">プレイ記録一覧</a></div>
-<div><a href="{{ url('playcount/') }}">ゲーム別プレイ回数</a></div>
 
 <form action="/search" method="get">
     <div>
@@ -26,6 +25,7 @@
     <input type="submit" value="検索">
 </form>
 
+<h2>ゲーム別プレイ回数</h2>
 <form action="/playcount" method="get">
     <div>年度：
         <select name="hi">
