@@ -5,7 +5,7 @@
 </head>
 <body>
 
-<h1>{{$gameData[0]['YEAR(hi)']}}年プレイ回数</h1>
+<h1>{{$hi}}年プレイ回数</h1>
 <table>
     <tr><th>ゲームID</th><th>メーカー名</th><th>ゲーム名</th><th>プレイした回数</th><th>評価の平均</th></tr>
     @foreach ($gameData as $data)

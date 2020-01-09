@@ -94,13 +94,13 @@ class GameController extends Controller
         $gameData = $game
             ->join('maker', 'maker.mid', '=', 'game.mid')
             ->join('play', 'play.gid', '=', 'game.gid')
-            ->select(DB::raw('count("*") AS playcount,avg(evaluation) AS evaluationAvg,play.gid,mname,gname,YEAR(hi)'))
+            ->select(DB::raw('count("*") AS playcount,avg(evaluation) AS evaluationAvg,play.gid,mname,gname'))
             ->whereRaw('YEAR(hi)=:hi',['hi' => $hi])
-            ->groupBy('play.gid','mname','gname','YEAR(hi)')
+            ->groupBy('play.gid','mname','gname')
             ->get();
 
         //SELECT count("*") AS playcount,avg(evaluation) AS evaluationAvg,play.gid,mname,gname,YEAR(hi) FROM game INNER JOIN maker ON maker.mid=game.mid INNER JOIN play ON play.gid=game.gid WHERE YEAR(hi)="2020" GROUP BY play.gid,mname,gname,YEAR(hi);
 
-        return view('game.playcount', ['gameData' => $gameData]);
+        return view('game.playcount', ['gameData' => $gameData,'hi' => $hi]);
     }
 }
