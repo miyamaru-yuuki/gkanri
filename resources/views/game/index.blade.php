@@ -26,5 +26,16 @@
     <input type="submit" value="検索">
 </form>
 
+<form action="/playcount" method="get">
+    <div>年度：
+        <select name="pid">
+            @foreach($playData as $data)
+                <option value="{{$data['pid']}}">{{$data['hi']}}</option>
+            @endforeach
+        </select>
+    </div>
+    <input type="submit" value="表示">
+</form>
+
 </body>
 </html>

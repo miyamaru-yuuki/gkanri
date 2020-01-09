@@ -16,7 +16,13 @@ class GameController extends Controller
             ->join('maker', 'maker.mid', '=', 'game.mid')
             ->get();
 
-        return view('game.index', ['gameData' => $gameData]);
+        $play = new Play();
+        $playData = $play
+            ->select(DB::raw('gid,YEAR(hi) AS hi'))
+            ->distinct()
+            ->get();
+
+        return view('game.index', ['gameData' => $gameData,'playData' => $playData]);
     }
 
     public function search(Request $request)
