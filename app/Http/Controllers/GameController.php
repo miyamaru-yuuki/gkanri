@@ -67,21 +67,17 @@ class GameController extends Controller
             ->orderBy('play.hi', 'desc')
             ->get();
 
-        $play = new Play();
-        $playData = $play
+        $playData = $game
+            ->join('maker', 'maker.mid', '=', 'game.mid')
+            ->join('play', 'play.gid', '=', 'game.gid')
             ->select(DB::raw('avg(evaluation) AS evaluationAvg'))
             ->when($gid, function ($query, $gid) {
-                return $query->where('gid', '=', $gid);
+                return $query->where('game.gid', '=', $gid);
+            })
+            ->when($mid, function ($query, $mid) {
+                return $query->where('maker.mid', '=', $mid);
             })
             ->get();
-
-//        $maker = new Maker();
-//        $makerData = $maker
-//            ->select(DB::raw('avg(evaluation) AS evaluationAvg'))
-//            ->when($gid, function ($query, $gid) {
-//                return $query->where('gid', '=', $gid);
-//            })
-//            ->get();
 
         $gameDataAll = $game->all();
 
