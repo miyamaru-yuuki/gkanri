@@ -59,9 +59,14 @@ class GameController extends Controller
             ->orderBy('play.hi', 'desc')
             ->get();
 
+        $play = new Play();
+        $playData = $play
+            ->select(DB::raw('avg(evaluation) AS evaluationAvg'))
+            ->get();
+
         $gameDataAll = $game->all();
 
-        return view('game.play', ['gameData' => $gameData,'gameDataAll' => $gameDataAll]);
+        return view('game.play', ['gameData' => $gameData,'gameDataAll' => $gameDataAll,'playData' => $playData,]);
     }
 
     public function playaddkakunin(\App\Http\Requests\PlayAddRequest $request)

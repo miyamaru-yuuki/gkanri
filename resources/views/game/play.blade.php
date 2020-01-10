@@ -15,6 +15,8 @@
 
 <br>
 
+<p>プレイの平均評価：{{$playData[0]->evaluationAvg}}</p>
+
 <form action="/playaddkakunin" method="post">
     {{ csrf_field() }}
     <div>ゲーム名：
