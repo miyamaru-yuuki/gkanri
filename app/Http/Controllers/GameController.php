@@ -5,7 +5,6 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\Game;
 use App\Models\Play;
-use App\Models\Maker;
 use DB;
 
 class GameController extends Controller
@@ -120,9 +119,10 @@ class GameController extends Controller
             ->select(DB::raw('count("*") AS playcount,avg(evaluation) AS evaluationAvg,play.gid,mname,gname'))
             ->whereRaw('YEAR(hi)=:hi',['hi' => $hi])
             ->groupBy('play.gid','mname','gname')
+            ->havingRaw('playcount >= 2')
             ->get();
 
-        //SELECT count("*") AS playcount,avg(evaluation) AS evaluationAvg,play.gid,mname,gname,YEAR(hi) FROM game INNER JOIN maker ON maker.mid=game.mid INNER JOIN play ON play.gid=game.gid WHERE YEAR(hi)="2020" GROUP BY play.gid,mname,gname,YEAR(hi);
+        //SELECT count("*") AS playcount,avg(evaluation) AS evaluationAvg,play.gid,mname,gname,YEAR(hi) FROM game INNER JOIN maker ON maker.mid=game.mid INNER JOIN play ON play.gid=game.gid WHERE YEAR(hi)="2020" GROUP BY play.gid,mname,gname,YEAR(hi) HAVING playcount >= 2;
 
         return view('game.playcount', ['gameData' => $gameData,'hi' => $hi]);
     }
