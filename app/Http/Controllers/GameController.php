@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\Game;
 use App\Models\Play;
+use App\Models\Maker;
 use DB;
 
 class GameController extends Controller
@@ -47,7 +48,7 @@ class GameController extends Controller
         return view('game.searchnumber', ['gameData' => $gameData]);
     }
 
-    public function play($gid = null)
+    public function play($gid = null,$mid = null)
     {
         $game = new Game();
         $gameData = $game
@@ -55,6 +56,9 @@ class GameController extends Controller
             ->join('play', 'play.gid', '=', 'game.gid')
             ->when($gid, function ($query, $gid) {
                 return $query->where('play.gid', '=', $gid);
+            })
+            ->when($mid, function ($query, $mid) {
+                return $query->where('maker.mid', '=', $mid);
             })
             ->orderBy('play.hi', 'desc')
             ->get();
@@ -66,6 +70,14 @@ class GameController extends Controller
                 return $query->where('gid', '=', $gid);
             })
             ->get();
+
+//        $maker = new Maker();
+//        $makerData = $maker
+//            ->select(DB::raw('avg(evaluation) AS evaluationAvg'))
+//            ->when($gid, function ($query, $gid) {
+//                return $query->where('gid', '=', $gid);
+//            })
+//            ->get();
 
         $gameDataAll = $game->all();
 

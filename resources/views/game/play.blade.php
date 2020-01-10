@@ -9,7 +9,7 @@
 <table>
     <tr><th>プレイID</th><th>メーカー名</th><th>ゲーム名</th><th>プレイした日時</th><th>プレイの評価</th></tr>
     @foreach ($gameData as $data)
-        <tr><td>{{$data->pid}}</td><td>{{$data->mname}}</td><td><a href="{{url('play/' .$data->gid)}}">{{$data->gname}}</a></td><td>{{$data->hi}}</td><td>{{$data->evaluation}}</td></tr>
+        <tr><td>{{$data->pid}}</td><td><a href="{{url('play/mid/' .$data->mid)}}">{{$data->mname}}</a></td><td><a href="{{url('play/' .$data->gid)}}">{{$data->gname}}</a></td><td>{{$data->hi}}</td><td>{{$data->evaluation}}</td></tr>
     @endforeach
 </table>
 
