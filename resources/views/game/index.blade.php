@@ -9,7 +9,7 @@
 <table>
     <tr><th>ゲームID</th><th>メーカー名</th><th>ゲーム名</th><th>プレイ可能な人数(最小)</th><th>プレイ可能な人数(最大)</th><th>標準プレイ時間</th><th>推奨年齢</th></tr>
     @foreach ($gameData as $data)
-        <tr><td>{{$data->gid}}</td><td><a href="{{$data->mweb}}">{{$data->mname}}</a></td><td>{{$data->gname}}</td><td>{{$data->playersnumbermin}}</td><td>{{$data->playersnumbermax}}</td><td>{{$data->playtime}}</td><td>{{$data->recommendedage}}</td></tr>
+        <tr><td>{{$data->gid}}</td><td>{{$data->mname}}</td><td>{{$data->gname}}</td><td>{{$data->playersnumbermin}}</td><td>{{$data->playersnumbermax}}</td><td>{{$data->playtime}}</td><td>{{$data->recommendedage}}</td></tr>
     @endforeach
 </table>
 

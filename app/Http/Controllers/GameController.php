@@ -47,12 +47,15 @@ class GameController extends Controller
         return view('game.searchnumber', ['gameData' => $gameData]);
     }
 
-    public function play()
+    public function play($gid = null)
     {
         $game = new Game();
         $gameData = $game
             ->join('maker', 'maker.mid', '=', 'game.mid')
             ->join('play', 'play.gid', '=', 'game.gid')
+            ->when($gid, function ($query, $gid) {
+                return $query->where('play.gid', '=', $gid);
+            })
             ->orderBy('play.hi', 'desc')
             ->get();
 
