@@ -62,6 +62,9 @@ class GameController extends Controller
         $play = new Play();
         $playData = $play
             ->select(DB::raw('avg(evaluation) AS evaluationAvg'))
+            ->when($gid, function ($query, $gid) {
+                return $query->where('gid', '=', $gid);
+            })
             ->get();
 
         $gameDataAll = $game->all();
